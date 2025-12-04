@@ -1,0 +1,18 @@
+# Environment variables (Secrets)
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Local data (Not needed for Vercel)
+articles.json
+backend/articles.json
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
