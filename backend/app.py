@@ -2,6 +2,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 import os
+import sys
+
+# Vercel deployment fix: Add current directory to system path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import processor
 import vector_db
 import google.generativeai as genai
