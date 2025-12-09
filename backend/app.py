@@ -55,15 +55,19 @@ def chat():
         return jsonify({"response": "Sorry, I couldn't process your request."})
     
     # 2. Query Pinecone
-    results = vector_db.query_vectors(query_embedding, top_k=3)
+    results = vector_db.query_vectors(query_embedding, top_k=10)
     
     context_text = ""
     if results and results.matches:
+        print(f"Found {len(results.matches)} matches:")
         for match in results.matches:
             meta = match.metadata
+            title = meta.get('title')
+            print(f" - {title} (Score: {match.score})")
+            
             # Use full_text if available for better answers
             content = meta.get('full_text') or meta.get('summary')
-            context_text += f"Title: {meta.get('title')}\nContent: {content}\nSource: {meta.get('source')}\n\n"
+            context_text += f"Title: {title}\nContent: {content}\nSource: {meta.get('source')}\n\n"
     
     print("Context found:", context_text[:100] + "...")
     
